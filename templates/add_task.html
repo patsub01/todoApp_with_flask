@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Add a New Task</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Add a New Task</h1>
+        </header>
+        <form action="{{ url_for('add_task') }}" method="POST">
+            <table>
+                <tr>
+                    <td><label for="task">Task:</label></td>
+                    <td><input type="text" id="task" name="task" required></td>
+                </tr>
+                <tr>
+                    <td><label for="priority">Priority:</label></td>
+                    <td>
+                        <select id="priority" name="priority" required>
+                            <option value="1">High</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Low</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="status">Status:</label></td>
+                    <td>
+                        <select id="status" name="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Add Task</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <a href="{{ url_for('index') }}" class="orange-link">Back to To-Do List</a>
+    </div>
+</body>
+</html>

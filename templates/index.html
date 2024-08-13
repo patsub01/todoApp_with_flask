@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <header>         
+            <h1>To-Do List</h1>
+            <a href="{{ url_for('add_task') }}" class="add-btn">Add Task</a>
+        </header>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr class="{{ 'completed' if task[3] == 'Completed' else '' }}">
+                    <td>{{ task[1] }}</td>
+                    <td>
+                        {% if task[2] == 1 %}High{% elif task[2] == 2 %}Medium{% else %}Low{% endif %}
+                    </td>
+                    <td>{{ task[3] }}</td>
+                    <td>
+                        <a href="{{ url_for('complete_task', id=task[0]) }}" class="complete-btn">Complete</a>
+                        <a href="{{ url_for('edit_task', id=task[0]) }}" class="orange-link">Edit</a>
+                        <a href="{{ url_for('delete_task', id=task[0]) }}" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
